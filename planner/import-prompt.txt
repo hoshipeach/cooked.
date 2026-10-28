@@ -1,0 +1,342 @@
+Export the cooking plan we have agreed as one COOKED! JSON object, using the structure below. Return only a JSON code block, with no commentary. Preserve our actual dishes, quantities, appliances, date, ready time and timezone. Do not fill missing recipe details by pretending they were agreed: ask me for necessary details before exporting.
+
+Use schemaVersion "1.1.0". Give the plan a stable planId, and increment revision when revising it. All dish, ingredient and stage IDs must use lower-case letters, numbers and hyphens. Each stage must reference a dish, and each dish must list its stage IDs. Stage ingredient allocations must reference ingredient IDs. Allocate every quantified ingredient across stages using the same unit as its recipeTotal; the amounts must add up. Use null preparation when none is needed, and null timer when no timer is needed. Use "needs-review" for quantities requiring my review; use "verified" only for quantities we have actually checked together. Do not claim recipe testing.
+
+Use valid HH:MM times in chronological order, on a single YYYY-MM-DD service date. The final stage must not be after targetTime. Use an IANA timezone (normally Asia/Dubai, unless we agreed otherwise). Put quantities and stage instructions into the explicit fields, not only into a note. Limit instructions to 800 characters each and plans to 60 stages.
+
+Example structure (illustration only; replace the meal details with our actual agreed plan):
+{
+  "$schema": "../schema/cooking-plan.schema.v1.json",
+  "schemaVersion": "1.1.0",
+  "planId": "demo-roast-beef-2026-10-27",
+  "revision": 2,
+  "timezone": "Asia/Dubai",
+  "menu": {
+    "title": "Roast Beef Dinner",
+    "description": "Pressure-cooked beef, crisp roast potatoes, vegetables and proper gravy."
+  },
+  "service": {
+    "date": "2026-10-27",
+    "label": "Tuesday dinner",
+    "targetTime": "16:00"
+  },
+  "dishes": [
+    {
+      "id": "dish-roast-beef-dinner",
+      "name": "Roast Beef Dinner",
+      "stageIds": [
+        "prepare-beef",
+        "pressure-cook",
+        "pressure-release",
+        "roast-potatoes",
+        "vegetables-gravy",
+        "finish-plate"
+      ]
+    }
+  ],
+  "ingredients": [
+    {
+      "id": "beef-joint",
+      "name": "Beef roasting joint",
+      "recipeTotal": {
+        "quantity": 1200,
+        "unit": "g"
+      },
+      "verification": "demonstration"
+    },
+    {
+      "id": "salt",
+      "name": "Fine salt",
+      "recipeTotal": {
+        "quantity": 8,
+        "unit": "g"
+      },
+      "verification": "demonstration"
+    },
+    {
+      "id": "black-pepper",
+      "name": "Black pepper",
+      "recipeTotal": {
+        "quantity": 2,
+        "unit": "g"
+      },
+      "verification": "demonstration"
+    },
+    {
+      "id": "olive-oil",
+      "name": "Olive oil",
+      "recipeTotal": {
+        "quantity": 30,
+        "unit": "ml"
+      },
+      "verification": "demonstration"
+    },
+    {
+      "id": "beef-stock",
+      "name": "Beef stock",
+      "recipeTotal": {
+        "quantity": 500,
+        "unit": "ml"
+      },
+      "verification": "demonstration"
+    },
+    {
+      "id": "onion",
+      "name": "Onion",
+      "recipeTotal": {
+        "quantity": 200,
+        "unit": "g"
+      },
+      "verification": "demonstration"
+    },
+    {
+      "id": "garlic",
+      "name": "Garlic cloves",
+      "recipeTotal": {
+        "quantity": 12,
+        "unit": "g"
+      },
+      "verification": "demonstration"
+    },
+    {
+      "id": "tomato-puree",
+      "name": "Tomato purée",
+      "recipeTotal": {
+        "quantity": 30,
+        "unit": "g"
+      },
+      "verification": "demonstration"
+    },
+    {
+      "id": "thyme",
+      "name": "Fresh thyme",
+      "recipeTotal": {
+        "quantity": 6,
+        "unit": "g"
+      },
+      "verification": "demonstration"
+    },
+    {
+      "id": "potatoes",
+      "name": "Roasting potatoes",
+      "recipeTotal": {
+        "quantity": 1000,
+        "unit": "g"
+      },
+      "verification": "demonstration"
+    },
+    {
+      "id": "duck-fat",
+      "name": "Duck fat",
+      "recipeTotal": {
+        "quantity": 60,
+        "unit": "g"
+      },
+      "verification": "demonstration"
+    },
+    {
+      "id": "carrots",
+      "name": "Carrots",
+      "recipeTotal": {
+        "quantity": 400,
+        "unit": "g"
+      },
+      "verification": "demonstration"
+    },
+    {
+      "id": "green-beans",
+      "name": "Green beans",
+      "recipeTotal": {
+        "quantity": 300,
+        "unit": "g"
+      },
+      "verification": "demonstration"
+    },
+    {
+      "id": "butter",
+      "name": "Unsalted butter",
+      "recipeTotal": {
+        "quantity": 40,
+        "unit": "g"
+      },
+      "verification": "demonstration"
+    },
+    {
+      "id": "plain-flour",
+      "name": "Plain flour",
+      "recipeTotal": {
+        "quantity": 25,
+        "unit": "g"
+      },
+      "verification": "demonstration"
+    }
+  ],
+  "timeline": [
+    {
+      "id": "prepare-beef",
+      "dishId": "dish-roast-beef-dinner",
+      "scheduledTime": "13:00",
+      "instruction": "Prepare, season and sear the beef.",
+      "shortLabel": "Sear the beef",
+      "timer": null,
+      "ingredientAllocations": [
+        {
+          "ingredientId": "beef-joint",
+          "quantity": 1200,
+          "unit": "g",
+          "preparation": "room temperature"
+        },
+        {
+          "ingredientId": "salt",
+          "quantity": 5,
+          "unit": "g",
+          "preparation": null
+        },
+        {
+          "ingredientId": "black-pepper",
+          "quantity": 2,
+          "unit": "g",
+          "preparation": "freshly ground"
+        },
+        {
+          "ingredientId": "olive-oil",
+          "quantity": 30,
+          "unit": "ml",
+          "preparation": null
+        }
+      ]
+    },
+    {
+      "id": "pressure-cook",
+      "dishId": "dish-roast-beef-dinner",
+      "scheduledTime": "13:20",
+      "instruction": "Start the Nutricook pressure cooker with stock, onion, garlic, tomato purée and thyme.",
+      "shortLabel": "Pressure cook",
+      "timer": {
+        "label": "Beef pressure cook",
+        "durationSeconds": 4500
+      },
+      "ingredientAllocations": [
+        {
+          "ingredientId": "beef-stock",
+          "quantity": 500,
+          "unit": "ml",
+          "preparation": "warmed"
+        },
+        {
+          "ingredientId": "onion",
+          "quantity": 200,
+          "unit": "g",
+          "preparation": "roughly chopped"
+        },
+        {
+          "ingredientId": "garlic",
+          "quantity": 12,
+          "unit": "g",
+          "preparation": "crushed"
+        },
+        {
+          "ingredientId": "tomato-puree",
+          "quantity": 30,
+          "unit": "g",
+          "preparation": null
+        },
+        {
+          "ingredientId": "thyme",
+          "quantity": 6,
+          "unit": "g",
+          "preparation": "leaves picked"
+        }
+      ]
+    },
+    {
+      "id": "pressure-release",
+      "dishId": "dish-roast-beef-dinner",
+      "scheduledTime": "14:35",
+      "instruction": "Check pressure-cooking progress and allow natural pressure release when appropriate.",
+      "shortLabel": "Check and release",
+      "timer": null,
+      "ingredientAllocations": []
+    },
+    {
+      "id": "roast-potatoes",
+      "dishId": "dish-roast-beef-dinner",
+      "scheduledTime": "15:00",
+      "instruction": "Start roast potatoes and check beef tenderness.",
+      "shortLabel": "Roast potatoes",
+      "timer": {
+        "label": "Roast potatoes",
+        "durationSeconds": 3000
+      },
+      "ingredientAllocations": [
+        {
+          "ingredientId": "potatoes",
+          "quantity": 1000,
+          "unit": "g",
+          "preparation": "peeled and parboiled"
+        },
+        {
+          "ingredientId": "duck-fat",
+          "quantity": 60,
+          "unit": "g",
+          "preparation": "melted"
+        },
+        {
+          "ingredientId": "salt",
+          "quantity": 3,
+          "unit": "g",
+          "preparation": null
+        }
+      ]
+    },
+    {
+      "id": "vegetables-gravy",
+      "dishId": "dish-roast-beef-dinner",
+      "scheduledTime": "15:25",
+      "instruction": "Prepare vegetables and gravy.",
+      "shortLabel": "Vegetables and gravy",
+      "timer": null,
+      "ingredientAllocations": [
+        {
+          "ingredientId": "carrots",
+          "quantity": 400,
+          "unit": "g",
+          "preparation": "peeled and sliced"
+        },
+        {
+          "ingredientId": "green-beans",
+          "quantity": 300,
+          "unit": "g",
+          "preparation": "trimmed"
+        },
+        {
+          "ingredientId": "butter",
+          "quantity": 40,
+          "unit": "g",
+          "preparation": "softened"
+        },
+        {
+          "ingredientId": "plain-flour",
+          "quantity": 25,
+          "unit": "g",
+          "preparation": null
+        }
+      ]
+    },
+    {
+      "id": "finish-plate",
+      "dishId": "dish-roast-beef-dinner",
+      "scheduledTime": "15:50",
+      "instruction": "Finish and plate dinner.",
+      "shortLabel": "Finish and plate",
+      "timer": null,
+      "ingredientAllocations": []
+    }
+  ],
+  "provenance": {
+    "source": "COOKED! demonstration plan",
+    "generatedAt": "2026-10-27T00:00:00+04:00",
+    "quantityStatus": "Demonstration quantities only — not recipe-tested",
+    "notes": "Timings and quantities require review for the chosen cut, weight and appliances."
+  }
+}

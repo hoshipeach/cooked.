@@ -1,0 +1,14 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#E86F83"><title>COOKED! — Kitchen Display</title><link rel="stylesheet" href="styles.css"></head><body>
+<main id="app" aria-live="polite">
+  <header class="masthead"><div class="brand-lockup"><img class="brand-logo" src="assets/cooked-logo.png" alt="COOKED!"><span class="brand-tag">Kitchen mode</span></div><div class="service-lockup"><span>Dinner hits the table</span><strong id="readyTime">16:00</strong><b aria-hidden="true">✦</b></div></header>
+  <section class="worktop">
+    <aside class="recipe-rail"><div><p class="micro">Tonight · <span id="planDate"></span></p><h1 id="planTitle">Roast Beef Dinner</h1></div><p id="planSubtitle" class="subtitle"></p><div class="rail-foot"><span id="stageCount">6 stages</span><button id="showAllTop" type="button">Full run of show <b>↗</b></button></div></aside>
+    <section class="stage-panel">
+      <div class="stage-head"><div><span class="stage-chip">Now cooking</span><span id="stageFraction">01 / 06</span></div><div class="progress-track"><i id="progressFill"></i></div></div>
+      <div class="stage-grid"><article class="instruction"><p id="currentTime">13:00</p><h2 id="currentInstruction">Prepare, season and sear the beef.</h2><div class="up-next"><span>Up next · <b id="nextTime">13:20</b></span><p id="nextInstruction"></p></div></article><aside class="ingredients-panel"><div class="ingredients-title"><span class="motif" aria-hidden="true">♨</span><div><p class="micro">This stage</p><h3>You’ll need</h3></div></div><ul id="ingredientList"></ul><p class="demo-note">Demonstration quantities — review before cooking</p></aside></div>
+      <nav class="primary-actions" aria-label="Cooking controls"><button id="previous" type="button"><span>←</span> Previous</button><button id="repeat" type="button"><span>↻</span> Repeat</button><button id="showAll" type="button"><span>≡</span> Show all</button><button id="next" class="next-button" type="button">Next stage <span>→</span></button></nav>
+    </section>
+  </section>
+  <section class="timeline-strip" aria-label="Six-stage cooking timeline"><div id="timeline" class="timeline"></div><div class="timer-zone"><button id="timerButton" type="button"><span class="timer-glyph">◷</span><span><small id="timerLabel">Local kitchen timer</small><strong id="timerValue">Start 10:00</strong></span></button><em>Simulation</em></div></section>
+</main>
+<dialog id="timelineDialog"><div class="dialog-head"><div><p class="micro">Roast beef dinner</p><h2>The whole game plan</h2></div><button id="closeDialog" aria-label="Close timeline" type="button">×</button></div><ol id="timelineList"></ol></dialog><div id="toast" class="toast" role="status"></div><script type="module" src="app.js"></script></body></html>
